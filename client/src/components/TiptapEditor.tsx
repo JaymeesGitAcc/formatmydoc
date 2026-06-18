@@ -1,9 +1,10 @@
+import { generatePdf } from "@/api/pdf"
 import "@/styles/editor.css"
 import { EditorContent, useEditor } from "@tiptap/react"
 import { StarterKit } from "@tiptap/starter-kit"
 
 const sampleHtml = `
- <h1>Document Title</h1>
+ <h1>Andrew James</h1>
 
 <p>
   This paragraph contains
@@ -34,8 +35,38 @@ const TiptapEditor = () => {
     extensions: [StarterKit],
     content: sampleHtml,
   })
+
+  const handleExportPdf = async () => {
+    if (!editor) return
+
+    try {
+      const html = editor.getHTML()
+
+      const pdfBlob = await generatePdf(html)
+
+      const url = window.URL.createObjectURL(pdfBlob)
+
+      const link = document.createElement("a")
+      link.href = url
+      link.download = "document.pdf"
+
+      document.body.appendChild(link)
+      link.click()
+
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     <div className="border rounded-lg p-4">
+      <button
+        onClick={handleExportPdf}
+        className="mb-4 rounded border px-4 py-2"
+      >
+        Export PDF
+      </button>
       <EditorContent editor={editor} />
       <button
         onClick={() => console.log(editor.getHTML())}
