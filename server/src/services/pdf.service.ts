@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer"
-import { editorStyles } from "../styles/editorStyles"
+import { pdfStyles } from "../styles/pdf.styles"
 
 export const generatePdf = async (html: string) => {
   const browser = await puppeteer.launch()
@@ -11,7 +11,7 @@ export const generatePdf = async (html: string) => {
     <html>
       <head>
         <style>
-          ${editorStyles}
+          ${pdfStyles}
         </style>
       </head>
 
@@ -28,6 +28,12 @@ export const generatePdf = async (html: string) => {
   const pdf = await page.pdf({
     format: "A4",
     printBackground: true,
+    margin: {
+      top: "15mm",
+      right: "15mm",
+      bottom: "15mm",
+      left: "15mm",
+    },
   })
 
   await browser.close()
