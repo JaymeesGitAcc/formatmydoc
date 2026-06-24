@@ -1,11 +1,11 @@
 import "@/styles/editor.css"
-import { MenuBar } from "@/components/MenuBar"
-import { EditorContent } from "@tiptap/react"
 import type { Editor as EditorType } from "@tiptap/react"
+import Toolbar from "@/components/Toolbar"
+import { EditorContent } from "@tiptap/react"
 import { useEffect } from "react"
 
 interface EditorProps {
-  content: string,
+  content: string
   editor: EditorType | null
 }
 
@@ -17,8 +17,10 @@ const Editor = ({ content, editor }: EditorProps) => {
   }, [editor, content])
 
   return (
-    <div className="border">
-      <MenuBar editor={editor} />
+    <div className="border rounded-lg overflow-hidden">
+      <div className="border-b">
+        <Toolbar editor={editor} />
+      </div>
       <EditorContent editor={editor} />
     </div>
   )

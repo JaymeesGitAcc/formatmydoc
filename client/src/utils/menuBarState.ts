@@ -25,6 +25,7 @@ export function menuBarStateSelector(ctx: EditorStateSnapshot<Editor | null>) {
     isHeading4: ctx.editor?.isActive("heading", { level: 4 }) ?? false,
     isHeading5: ctx.editor?.isActive("heading", { level: 5 }) ?? false,
     isHeading6: ctx.editor?.isActive("heading", { level: 6 }) ?? false,
+    isUnderline: ctx.editor?.isActive("underline") ?? false,
 
     // Lists and blocks
     isBulletList: ctx.editor?.isActive("bulletList") ?? false,
