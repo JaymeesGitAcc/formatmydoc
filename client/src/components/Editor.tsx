@@ -21,7 +21,7 @@ const Editor = ({ content, editor }: EditorProps) => {
       <div className="border-b">
         <Toolbar editor={editor} />
       </div>
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} className="overflow-y-auto bg-white" />
     </div>
   )
 }
